@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/domains/mypadidoc.com/public_html/
+    - /bin/sh -c 'for item in out/*; do name=$(basename "$item"); /bin/rm -rf "$DEPLOYPATH/$name"; done'
+    - /bin/cp -r out/* $DEPLOYPATH
