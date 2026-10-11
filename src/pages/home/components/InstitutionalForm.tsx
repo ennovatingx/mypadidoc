@@ -1,4 +1,5 @@
 import { useState, useRef, FormEvent } from "react";
+import { API_BASE_URL } from "@/config/api";
 
 const ORG_TYPES = [
   { value: "hospital", label: "Hospital" },
@@ -6,8 +7,6 @@ const ORG_TYPES = [
   { value: "ngo", label: "NGO" },
   { value: "other", label: "Other" },
 ];
-
-const API_BASE = "https://5213-102-88-166-31.ngrok-free.app";
 
 export default function InstitutionalForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -45,7 +44,7 @@ export default function InstitutionalForm() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/api/partners/`, {
+      const res = await fetch(`${API_BASE_URL}/api/partners/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

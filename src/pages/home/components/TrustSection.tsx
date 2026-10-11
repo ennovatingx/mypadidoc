@@ -5,57 +5,41 @@ export default function TrustSection() {
         <div className="bg-primary-50 rounded-2xl md:rounded-3xl p-8 md:p-16 flex flex-col items-center gap-8 md:gap-10">
           {/* Heading */}
           <div className="text-center max-w-[700px]">
+            <p className="text-sm font-semibold text-primary-600 uppercase tracking-wider mb-3">
+              Built around everyday life
+            </p>
             <h2 className="text-2xl md:text-[40px] font-medium text-foreground-950 leading-tight mb-3">
-              Complies with the highest standards of quality and data security
+              Built for people, culture, and care
             </h2>
             <p className="text-base md:text-lg text-foreground-500 leading-relaxed">
-              Please Note: Your data is confidential and secured by the Nigeria Data Protection Act (NDPR) standards.
+              We are designing mypadidoc around how Nigerians seek information, support one another, and make everyday health decisions. AI can help people navigate care — it does not replace the people who provide it.
             </p>
           </div>
 
-          {/* Compliance badges */}
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white shadow-sm flex items-center justify-center">
-                <div className="text-center">
-                  <i className="ri-shield-check-line text-3xl md:text-4xl text-primary-500"></i>
-                  <p className="text-[10px] font-semibold text-foreground-700 mt-1">NDPC</p>
-                </div>
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-[900px]">
+            <div className="rounded-2xl bg-white p-5 text-center">
+              <i className="ri-map-pin-heart-line text-3xl text-primary-500"></i>
+              <h3 className="mt-3 font-semibold text-foreground-950">Made for our context</h3>
+              <p className="mt-2 text-sm leading-relaxed text-foreground-500">Guidance shaped around local realities, language, and the choices people make every day.</p>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white shadow-sm flex items-center justify-center">
-                <div className="text-center">
-                  <i className="ri-lock-line text-3xl md:text-4xl text-primary-500"></i>
-                  <p className="text-[10px] font-semibold text-foreground-700 mt-1">NDPR</p>
-                </div>
-              </div>
+            <div className="rounded-2xl bg-white p-5 text-center">
+              <i className="ri-book-open-line text-3xl text-primary-500"></i>
+              <h3 className="mt-3 font-semibold text-foreground-950">Education that empowers</h3>
+              <p className="mt-2 text-sm leading-relaxed text-foreground-500">Clear, accessible health information that helps people understand and manage their journeys.</p>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white shadow-sm flex items-center justify-center">
-                <div className="text-center">
-                  <i className="ri-secure-payment-line text-3xl md:text-4xl text-primary-500"></i>
-                  <p className="text-[10px] font-semibold text-foreground-700 mt-1">GDPR</p>
-                </div>
-              </div>
+            <div className="rounded-2xl bg-white p-5 text-center">
+              <i className="ri-stethoscope-line text-3xl text-primary-500"></i>
+              <h3 className="mt-3 font-semibold text-foreground-950">A bridge to care</h3>
+              <p className="mt-2 text-sm leading-relaxed text-foreground-500">Technology that helps people reach appropriate professionals and services when they need more support.</p>
             </div>
           </div>
 
           {/* Divider */}
           <div className="w-full max-w-[500px] h-px bg-primary-200"></div>
 
-          {/* Trusted by */}
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            <p className="text-lg md:text-xl font-medium text-foreground-700">Trusted By</p>
-            <div className="flex items-center gap-2 text-foreground-400">
-              <i className="ri-hospital-line text-2xl text-primary-400"></i>
-              <span className="text-sm font-medium text-foreground-500">Nigerian Healthcare Partners</span>
-            </div>
-            <div className="flex items-center gap-2 text-foreground-400">
-              <i className="ri-community-line text-2xl text-primary-400"></i>
-              <span className="text-sm font-medium text-foreground-500">Counselling Associations</span>
-            </div>
-          </div>
+          <p className="max-w-[640px] text-center text-sm text-foreground-500 leading-relaxed">
+            Starting in Nigeria, our goal is to build a trusted bridge between people and healthcare across Africa.
+          </p>
 
           {/* CTA */}
           <button

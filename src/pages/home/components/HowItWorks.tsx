@@ -1,26 +1,26 @@
 const STEPS = [
   {
     icon: "ri-whatsapp-line",
-    title: "Start a Chat",
-    description: "Message us on WhatsApp or dial our USSD code. No app to download — it works on any phone.",
+    title: "Start with your concern",
+    description: "Begin with what is on your mind. No medical jargon required — just tell us what you are experiencing.",
     bg: "bg-emerald-50",
   },
   {
-    icon: "ri-file-list-3-line",
-    title: "Describe what's going on",
-    description: "Tell us how you're feeling in your own words. No medical jargon needed — just talk to us.",
+    icon: "ri-attachment-2",
+    title: "Make it personal",
+    description: "Share what feels relevant, in your own words, so the guidance reflects your situation rather than a generic search result.",
     bg: "bg-violet-50",
   },
   {
-    icon: "ri-lightbulb-flash-line",
-    title: "Get guided next steps",
-    description: "We'll ask the right questions and give you clear, structured guidance based on what you shared.",
+    icon: "ri-voiceprint-line",
+    title: "Understand what matters",
+    description: "Learn about your concern, recognise possible urgency, and get health education that helps you make informed choices.",
     bg: "bg-amber-50",
   },
   {
-    icon: "ri-user-follow-line",
-    title: "Connect with professionals",
-    description: "When needed, we connect you to trusted, verified doctors and counsellors for further care.",
+    icon: "ri-route-line",
+    title: "Move forward with confidence",
+    description: "Get clear next steps and, when appropriate, guidance toward the right healthcare professional or service.",
     bg: "bg-sky-50",
   },
 ];
@@ -37,10 +37,10 @@ export default function HowItWorks() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div className="flex flex-col gap-4 max-w-[500px]">
             <h2 className="text-2xl md:text-[40px] font-medium text-foreground-950 leading-tight">
-              How does it work?
+              A more personal way to navigate health
             </h2>
             <p className="text-base md:text-lg text-foreground-500 leading-relaxed">
-              mypadidoc is very easy to use. Start by telling us what's going on. There's no limit on how much you can share. After that, just answer a few quick questions. Once that's done, you'll get clear next steps and, if needed, a connection to a real provider.
+              mypadidoc helps make healthcare feel less overwhelming. Start with a conversation, get support that reflects your needs and context, and understand where to turn next — from everyday questions to moments that need more urgent care.
             </p>
           </div>
           <div className="shrink-0">

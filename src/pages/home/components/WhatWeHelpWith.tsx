@@ -34,13 +34,13 @@ export default function WhatWeHelpWith() {
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center mb-12 md:mb-16">
           <p className="text-sm font-semibold text-primary-600 uppercase tracking-wider mb-3">
-            Powered by AI Chatbot
+            Personalized health navigation
           </p>
           <h2 className="text-2xl md:text-[40px] font-medium text-foreground-950 leading-tight mb-4">
-            What we help with
+            Support for the health questions that shape everyday life
           </h2>
           <p className="text-base md:text-lg text-foreground-500 max-w-[700px] mx-auto leading-relaxed">
-            Three health areas, one chatbot conversation. Start on WhatsApp or USSD — we listen, guide, assess, and connect you to real providers when needed.
+            Three health areas, one personal starting point. mypadidoc helps you understand what you are experiencing, learn as you go, and find appropriate care when you need it.
           </p>
         </div>
 

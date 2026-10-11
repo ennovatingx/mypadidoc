@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import logoGreen from "../../../../logo_files/mpd_page3_green_logo_white_bg.svg";
 
 const NAV_LINKS = [
   { label: "How it works", target: "how-it-works" },
@@ -31,11 +32,12 @@ export default function Navbar() {
         }`}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 font-semibold text-xl md:text-2xl text-foreground-950 whitespace-nowrap">
-          <div className="w-8 h-8 md:w-9 md:h-9 bg-primary-500 rounded-lg flex items-center justify-center">
-            <i className="ri-heart-pulse-fill text-white text-lg md:text-xl"></i>
-          </div>
-          mypadidoc
+        <a href="/" className="flex items-center shrink-0" aria-label="mypadidoc home">
+          <img
+            src={logoGreen}
+            alt="mypadidoc"
+            className="w-[112px] md:w-[124px] h-auto mix-blend-multiply"
+          />
         </a>
 
         {/* Desktop links */}

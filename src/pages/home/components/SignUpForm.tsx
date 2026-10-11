@@ -1,4 +1,6 @@
 import { useState, useRef, FormEvent } from "react";
+import GoogleSignInButton from "@/pages/home/components/GoogleSignInButton";
+import { API_BASE_URL, type AuthResponse } from "@/config/api";
 
 const INTEREST_OPTIONS = [
   { value: "physical_health", label: "Physical Health" },
@@ -6,14 +8,28 @@ const INTEREST_OPTIONS = [
   { value: "reproductive_health", label: "Reproductive Health" },
 ];
 
-const API_BASE = "https://5213-102-88-166-31.ngrok-free.app";
-
 export default function SignUpForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
   const [selectedInterest, setSelectedInterest] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleGoogleSuccess = (auth: AuthResponse) => {
+    const form = formRef.current;
+    if (form) {
+      const name = [auth.user.first_name, auth.user.last_name].filter(Boolean).join(" ");
+      const fullName = form.elements.namedItem("full_name") as HTMLInputElement | null;
+      if (fullName && !fullName.value) fullName.value = name;
+    }
+    setStatus("success");
+    setStatusMessage(`Signed in as ${auth.user.email}. Complete the form to join the pilot.`);
+  };
+
+  const handleGoogleError = (message: string) => {
+    setStatus("error");
+    setStatusMessage(message);
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,7 +65,7 @@ export default function SignUpForm() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/api/users/`, {
+      const res = await fetch(`${API_BASE_URL}/api/users/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -212,6 +228,19 @@ export default function SignUpForm() {
               "Request early access"
             )}
           </button>
+
+          <div className="relative py-1">
+            <div className="absolute inset-0 flex items-center" aria-hidden="true">
+              <div className="w-full border-t border-background-300"></div>
+            </div>
+            <p className="relative mx-auto w-fit bg-background-100 px-3 text-xs text-foreground-400">or</p>
+          </div>
+
+          <GoogleSignInButton
+            disabled={loading}
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+          />
 
           {status !== "idle" && !loading && (
             <p

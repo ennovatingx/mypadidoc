@@ -1,140 +1,42 @@
+import { useState, type CSSProperties, type FormEvent } from "react";
+import AssistantChat from "@/pages/home/components/AssistantChat";
+import portraitManOne from "@/assets/portraits/portrait-man-one.jpg";
+import portraitManTwo from "@/assets/portraits/portrait-man-two.jpg";
+import portraitWomanOne from "@/assets/portraits/portrait-woman-one.jpg";
+import portraitWomanTwo from "@/assets/portraits/portrait-woman-two.jpg";
+
 const AVATARS = [
-  "https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20a%20young%20Nigerian%20woman%20with%20warm%20smile%2C%20natural%20soft%20lighting%2C%20clean%20warm%20cream%20background%2C%20editorial%20portrait%20photography%2C%20sharp%20focus%20on%20face%2C%20upper%20body%20crop&width=200&height=200&seq=avatar-hero-1&orientation=squarish",
-  "https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20a%20young%20Nigerian%20man%20with%20friendly%20confident%20expression%2C%20natural%20soft%20lighting%2C%20clean%20warm%20cream%20background%2C%20editorial%20portrait%20photography%2C%20sharp%20focus%20on%20face%2C%20upper%20body%20crop&width=200&height=200&seq=avatar-hero-2&orientation=squarish",
-  "https://readdy.ai/api/search-image?query=Professional%20headshot%20portrait%20of%20a%20middle-aged%20Nigerian%20woman%20with%20kind%20gentle%20expression%2C%20natural%20soft%20lighting%2C%20clean%20warm%20cream%20background%2C%20editorial%20portrait%20photography%2C%20sharp%20focus%20on%20face%2C%20upper%20body%20crop&width=200&height=200&seq=avatar-hero-3&orientation=squarish",
+  portraitWomanTwo,
+  portraitManOne,
+  portraitWomanOne,
 ];
 
+const MOMENTS = [
+  { photo: portraitWomanTwo, text: "I know what to do next", position: "left-[5%] top-[16%] md:left-[8%] md:top-[5%]", size: "h-[150px] w-[150px] md:h-[200px] md:w-[200px]", shape: "rounded-br-none", float: "hero-float-1" },
+  { photo: portraitManOne, text: "Help me understand this", position: "left-[58%] top-[4%] md:left-[32%] md:top-0", size: "h-[82px] w-[82px] md:h-[100px] md:w-[100px]", shape: "rounded-bl-none", float: "hero-float-2" },
+  { photo: portraitWomanOne, text: "Guidance that feels personal", position: "left-[34%] top-[49%] md:left-[48%] md:top-[25%]", size: "h-[112px] w-[112px] md:h-[160px] md:w-[160px]", shape: "rounded-bl-none", float: "hero-float-3" },
+  { photo: portraitManTwo, text: "The right care, when needed", position: "right-[5%] top-[32%] md:right-[10%] md:top-[8%]", size: "h-[96px] w-[96px] md:h-[130px] md:w-[130px]", shape: "rounded-br-none", float: "hero-float-4" },
+];
+
+function TypingCard({ text, delay = "0s" }: { text: string; delay?: string }) {
+  return <div className="w-fit rounded-2xl bg-white px-4 py-2.5 shadow-lg"><p className="hero-type text-sm font-medium text-foreground-700" style={{ "--typing-width": `${text.length}ch`, "--typing-steps": text.length, animationDelay: delay } as CSSProperties}>{text}</p></div>;
+}
+
 export default function HeroSection() {
-  const scrollToId = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessage, setChatMessage] = useState("");
+  const [composerText, setComposerText] = useState("");
+  const [startVoice, setStartVoice] = useState(false);
+  const openChat = (useVoice = false) => {
+    setChatMessage(composerText.trim());
+    setComposerText("");
+    setStartVoice(useVoice);
+    setChatOpen(true);
   };
-
-  return (
-    <section id="hero" className="relative w-full flex flex-col items-center">
-      {/* Text content */}
-      <div className="flex flex-col w-full max-w-[1100px] mx-auto gap-8 md:gap-10 px-4 md:px-6 pt-8 md:pt-12">
-        <div className="flex flex-col gap-5 md:gap-6 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] leading-[1.15] md:leading-[4.5rem] font-medium text-foreground-950 max-w-[900px] mx-auto animate-fade-up" style={{ animationDelay: '0.1s' }}>
-            Health guidance on WhatsApp or <span className="font-semibold">*USSD</span> — no app needed.
-          </h1>
-          <p className="text-base md:text-lg text-foreground-500 max-w-[700px] mx-auto leading-relaxed animate-fade-up" style={{ animationDelay: '0.25s' }}>
-            One chatbot conversation for physical health, mental health, and reproductive health. We assess severity, guide your next steps, and connect you to a real provider when it matters.
-          </p>
-        </div>
-
-        <div className="flex justify-center animate-fade-up" style={{ animationDelay: '0.4s' }}>
-          <button
-            onClick={() => scrollToId("signup-form")}
-            className="py-3 px-8 rounded-full rounded-tr-none bg-primary-500 text-white text-base font-medium hover:bg-primary-600 transition-colors cursor-pointer whitespace-nowrap"
-          >
-            Join the pilot
-          </button>
-        </div>
-
-        {/* Avatar stack + tagline */}
-        <div className="flex items-center justify-center gap-3 animate-fade-up" style={{ animationDelay: '0.55s' }}>
-          <div className="flex">
-            {AVATARS.map((src, i) => (
-              <div
-                key={i}
-                className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white overflow-hidden"
-                style={{ marginLeft: i === 0 ? 0 : '-14px' }}
-              >
-                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-            ))}
-          </div>
-          <p className="text-sm font-medium text-foreground-500">Starting in Lagos. Built for all of Nigeria.</p>
-        </div>
-      </div>
-
-      {/* Floating portrait composition */}
-      <div className="relative w-full max-w-[1200px] mx-auto mt-10 md:mt-16 h-[400px] md:h-[500px] hidden md:block">
-        {/* Left — large portrait yellow */}
-        <div className="absolute left-[8%] top-[5%] flex flex-col items-center gap-3">
-          <div className="w-[200px] h-[200px] rounded-full rounded-br-none overflow-hidden bg-amber-200">
-            <img
-              src="https://readdy.ai/api/search-image?query=Portrait%20of%20a%20smiling%20young%20Nigerian%20woman%20holding%20a%20phone%2C%20warm%20natural%20lighting%2C%20soft%20yellow%20background%20tint%2C%20lifestyle%20photography%2C%20candid%20joyful%20expression%2C%20upper%20body%20crop&width=400&height=400&seq=hero-portrait-1&orientation=squarish"
-              alt=""
-              className="w-full h-full object-cover object-top"
-              loading="lazy"
-            />
-          </div>
-          <div className="bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-tl-none w-fit">
-            <p className="text-sm font-normal text-foreground-700">I feel better now</p>
-          </div>
-        </div>
-
-        {/* Top center — blue portrait */}
-        <div className="absolute left-[32%] top-0 flex flex-col items-center gap-2">
-          <div className="w-[100px] h-[100px] rounded-full rounded-bl-none overflow-hidden bg-sky-200">
-            <img
-              src="https://readdy.ai/api/search-image?query=Portrait%20of%20a%20young%20Nigerian%20man%20in%20professional%20attire%2C%20friendly%20expression%2C%20clean%20blue%20tinted%20background%2C%20headshot%20photography%2C%20sharp%20focus&width=200&height=200&seq=hero-portrait-2&orientation=squarish"
-              alt=""
-              className="w-full h-full object-cover object-top"
-              loading="lazy"
-            />
-          </div>
-          <div className="bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-tr-none w-fit">
-            <p className="text-sm font-normal text-foreground-700">Analyze your symptoms</p>
-          </div>
-        </div>
-
-        {/* Center — teal portrait */}
-        <div className="absolute left-[48%] top-[25%] flex flex-col items-center gap-2">
-          <div className="w-[160px] h-[160px] rounded-full rounded-bl-none overflow-hidden bg-teal-200">
-            <img
-              src="https://readdy.ai/api/search-image?query=Portrait%20of%20a%20Nigerian%20woman%20in%20her%2030s%20with%20warm%20motherly%20expression%2C%20soft%20natural%20lighting%2C%20teal%20tinted%20background%2C%20lifestyle%20photography%2C%20gentle%20smile&width=320&height=320&seq=hero-portrait-3&orientation=squarish"
-              alt=""
-              className="w-full h-full object-cover object-top"
-              loading="lazy"
-            />
-          </div>
-          <div className="bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-tl-none w-fit">
-            <p className="text-sm font-normal text-foreground-700">Understand your health</p>
-          </div>
-        </div>
-
-        {/* Right — purple portrait */}
-        <div className="absolute right-[10%] top-[8%] flex flex-col items-center gap-2">
-          <div className="w-[130px] h-[130px] rounded-full rounded-br-none overflow-hidden bg-violet-200">
-            <img
-              src="https://readdy.ai/api/search-image?query=Portrait%20of%20a%20young%20Nigerian%20man%20with%20glasses%2C%20intellectual%20look%2C%20friendly%20smile%2C%20soft%20purple%20tinted%20background%2C%20professional%20headshot%20photography&width=260&height=260&seq=hero-portrait-4&orientation=squarish"
-              alt=""
-              className="w-full h-full object-cover object-top"
-              loading="lazy"
-            />
-          </div>
-          <div className="bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-tr-none w-fit">
-            <p className="text-sm font-normal text-foreground-700">Connected to a doctor</p>
-          </div>
-        </div>
-
-        {/* Chat bubble floating left of center */}
-        <div className="absolute left-[28%] top-[55%] bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-br-none w-fit">
-          <p className="text-sm font-normal text-foreground-700">Thank you for coming through</p>
-        </div>
-      </div>
-
-      {/* Mobile hero visual — simplified single portrait */}
-      <div className="md:hidden w-full px-4 mt-8">
-        <div className="w-[280px] h-[280px] rounded-full rounded-br-none mx-auto bg-amber-200 overflow-hidden flex items-center justify-center">
-          <img
-            src="https://readdy.ai/api/search-image?query=Portrait%20of%20a%20smiling%20young%20Nigerian%20woman%20holding%20a%20phone%2C%20warm%20natural%20lighting%2C%20soft%20yellow%20background%2C%20lifestyle%20photography%2C%20joyful%20expression%2C%20upper%20body%20crop&width=400&height=400&seq=hero-mobile&orientation=squarish"
-            alt=""
-            className="w-full h-full object-cover object-top"
-            loading="lazy"
-          />
-        </div>
-        <div className="flex flex-col gap-3 mt-4 items-center">
-          <div className="bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-tl-none w-fit">
-            <p className="text-sm font-semibold text-foreground-700">Thank you for coming through</p>
-          </div>
-          <div className="bg-white shadow-lg px-4 py-2.5 rounded-2xl rounded-tr-none w-fit">
-            <p className="text-sm font-semibold text-foreground-700">I feel better now</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="hero" className="relative flex w-full flex-col items-center overflow-hidden">
+    <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-7 px-4 pt-8 md:gap-9 md:px-6 md:pt-12"><div className="flex flex-col gap-5 text-center md:gap-6"><h1 className="animate-fade-up mx-auto max-w-[900px] text-3xl font-medium leading-[1.15] text-foreground-950 sm:text-4xl md:text-5xl md:leading-[4.5rem] lg:text-[64px]" style={{ animationDelay: "0.1s" }}>Your health journey deserves a guide, not just an answer.</h1><p className="animate-fade-up mx-auto max-w-[720px] text-base leading-relaxed text-foreground-500 md:text-lg" style={{ animationDelay: "0.25s" }}>mypadidoc is your personalized AI health navigator: a more accessible way to understand your concerns, recognise urgency, learn about your health, and find the right next step in care.</p></div>
+      <form onSubmit={(event) => { event.preventDefault(); openChat(); }} className="animate-fade-up mx-auto flex w-full max-w-[680px] items-center gap-1.5 rounded-[28px] border border-background-300 bg-white p-2 shadow-lg shadow-foreground-950/5" style={{ animationDelay: "0.4s" }}><input value={composerText} onChange={(event) => setComposerText(event.target.value)} className="min-w-0 flex-1 bg-transparent px-3 text-sm text-foreground-950 outline-none placeholder:text-foreground-400 md:text-base" placeholder="What would you like to talk about?" aria-label="Start a conversation" /><button type="button" disabled className="flex h-10 w-10 shrink-0 cursor-not-allowed items-center justify-center rounded-full text-foreground-300" aria-label="Voice dictation unavailable" title="Voice dictation unavailable"><i className="ri-mic-line text-xl" /></button><button type="submit" disabled className="flex h-11 w-11 shrink-0 cursor-not-allowed items-center justify-center rounded-full bg-primary-300 text-white" aria-label="Conversation unavailable" title="Conversation unavailable"><i className="ri-arrow-up-line text-xl" /></button></form><p className="-mt-4 text-center text-xs text-foreground-400">Chat and voice are temporarily unavailable. Join the pilot below.</p>
+      <div className="flex items-center justify-center gap-3"><div className="flex">{AVATARS.map((src, i) => <div key={src} className="h-10 w-10 overflow-hidden rounded-full border-2 border-white md:h-12 md:w-12" style={{ marginLeft: i ? "-14px" : 0 }}><img src={src} alt="Community member portrait" className="h-full w-full object-cover" /></div>)}</div><p className="text-sm font-medium text-foreground-500">Built for everyday life in Nigeria. Starting in Lagos.</p></div></div>
+    <div className="relative mt-8 h-[340px] w-full max-w-[1100px] md:mt-10 md:h-[500px]">{MOMENTS.map((moment, index) => <div key={moment.text} className={`absolute ${moment.position} ${moment.float} flex flex-col items-center gap-3`}><div className={`${moment.size} ${moment.shape} overflow-hidden rounded-full bg-primary-100 shadow-lg shadow-foreground-950/10`}><img src={moment.photo} alt="" className="h-full w-full object-cover object-top" /></div><div className="hidden md:block"><TypingCard text={moment.text} delay={`${index * 0.7}s`} /></div></div>)}</div>{chatOpen && <AssistantChat initialMessage={chatMessage} startVoice={startVoice} onClose={() => setChatOpen(false)} />}
+  </section>;
 }

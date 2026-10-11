@@ -11,7 +11,7 @@ export default function CTABanner() {
       {/* Content */}
       <div className="relative z-10 max-w-[700px] mx-auto text-center flex flex-col gap-6 md:gap-8 items-center">
         <h2 className="text-3xl md:text-5xl font-medium text-white leading-tight">
-          Accessing healthcare shouldn't be hard.
+          A trusted guide for every health journey.
         </h2>
         <button
           onClick={() => document.getElementById("signup-form")?.scrollIntoView({ behavior: "smooth" })}

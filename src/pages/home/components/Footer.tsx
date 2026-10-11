@@ -1,3 +1,5 @@
+import logoGreen from "../../../../logo_files/mpd_page3_green_logo_white_bg.svg";
+
 export default function Footer() {
   return (
     <footer className="relative w-full bg-background-100 pt-16 md:pt-20 pb-8 md:pb-12 px-4 md:px-6">
@@ -6,11 +8,8 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8 mb-12 md:mb-16">
           {/* Brand */}
           <div className="max-w-[320px]">
-            <a href="/" className="flex items-center gap-2 font-semibold text-xl text-foreground-950 mb-4">
-              <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-                <i className="ri-heart-pulse-fill text-white text-lg"></i>
-              </div>
-              mypadidoc
+            <a href="/" className="flex items-center w-[120px] mb-4" aria-label="mypadidoc home">
+              <img src={logoGreen} alt="mypadidoc" className="w-full h-auto mix-blend-multiply" />
             </a>
             <p className="text-sm text-foreground-500 leading-relaxed">
               AI-powered health triage for Nigeria — on WhatsApp or USSD. No app needed. Starting in Lagos, built for all of Nigeria.
